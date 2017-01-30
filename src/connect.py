@@ -5,7 +5,7 @@ import logging
 log = logging.getLogger('connect.py')
 
 
-class StompConnection(object):
+class StompConnection(stomp.Connection):
 
         def __init__(self, username, password, host_and_port, wait=True):
             self.username = username
@@ -27,11 +27,11 @@ class StompConnection(object):
             self.stomp_connection.connect(self.username, self.password, self.wait)
 
         def subscribe_to_topic(self, topic):
-            self.stomp_connection.subscribe(topic)
+            self.stomp_connection.subscribe(destination=topic, id='1', ack='auto')
 
         def subscribe_to_topic_list(self, topic_list):
             for topic in topic_list:
-                self.stomp_connection.subscribe(topic)
+                self.stomp_connection.subscribe(destination=topic, id='1', ack='auto')
 
         def publish_to_topic(self, topic, message):
             self.stomp_connection.send(topic, message)
