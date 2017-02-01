@@ -11,5 +11,5 @@ broker_connection.register_listener(CustomConnectionListener, 'custom')
 broker_connection.start_connection()
 
 broker_connection.subscribe_to_topic('topic.test')
-
-broker_connection.publish_to_topic('topic.test','Wrapper testing')
+for i in range(0, 10000, 1):
+    broker_connection.publish_to_topic('topic.test', 'Wrapper testing')
